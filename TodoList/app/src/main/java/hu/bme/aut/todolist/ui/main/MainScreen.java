@@ -7,5 +7,6 @@ import hu.bme.aut.todolist.model.Item;
 public interface MainScreen {
 
     void showTasks(List<Item> items);
+    void showTaskDetails(String taskId);
 
 }
