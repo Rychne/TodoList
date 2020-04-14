@@ -7,13 +7,18 @@ import android.os.Bundle;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import hu.bme.aut.todolist.R;
+import hu.bme.aut.todolist.TodoListApplication;
 import hu.bme.aut.todolist.model.Item;
 import hu.bme.aut.todolist.ui.details.DetailsActivity;
 
 public class MainActivity extends AppCompatActivity implements MainScreen {
 
     public static final String KEY_TASK_ID = "KEY_TASK_ID";
+
+    @Inject
     MainPresenter mainPresenter;
     private List<Item> tasksList;
 
@@ -21,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        TodoListApplication.injector.inject(this);
     }
 
     @Override

@@ -4,19 +4,24 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import javax.inject.Inject;
+
 import hu.bme.aut.todolist.R;
+import hu.bme.aut.todolist.TodoListApplication;
 import hu.bme.aut.todolist.model.Item;
 
 import static hu.bme.aut.todolist.ui.main.MainActivity.KEY_TASK_ID;
 
 public class DetailsActivity extends AppCompatActivity implements DetailsScreen {
 
-    private DetailsPresenter detailsPresenter;
+    @Inject
+    DetailsPresenter detailsPresenter;
     private String taskId;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.details_layout);
+        TodoListApplication.injector.inject(this);
     }
 
     @Override
