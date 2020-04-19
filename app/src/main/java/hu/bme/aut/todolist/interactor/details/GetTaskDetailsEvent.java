@@ -7,6 +7,9 @@ public class GetTaskDetailsEvent {
     private Item taskDetails;
     private Throwable throwable;
 
+    public GetTaskDetailsEvent() {
+    }
+
     public GetTaskDetailsEvent(int code, Item taskDetails, Throwable throwable) {
         this.code = code;
         this.taskDetails = taskDetails;

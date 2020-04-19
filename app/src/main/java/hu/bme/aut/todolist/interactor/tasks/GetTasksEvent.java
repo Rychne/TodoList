@@ -10,6 +10,9 @@ public class GetTasksEvent {
     private List<Item> tasks;
     private Throwable throwable;
 
+    public GetTasksEvent(){
+    }
+
     public GetTasksEvent(int code, List<Item> tasks, Throwable throwable) {
         this.code = code;
         this.tasks = tasks;
