@@ -8,7 +8,7 @@ import javax.inject.Inject;
 
 import hu.bme.aut.todolist.R;
 import hu.bme.aut.todolist.TodoListApplication;
-import hu.bme.aut.todolist.model.Item;
+import hu.bme.aut.todolist.model.Task;
 
 import static hu.bme.aut.todolist.ui.main.MainActivity.KEY_TASK_ID;
 
@@ -39,7 +39,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
     }
 
     @Override
-    public void showTask(Item task) {
+    public void showTask(Task task) {
 
     }
 }

@@ -11,7 +11,7 @@ import javax.inject.Inject;
 
 import hu.bme.aut.todolist.R;
 import hu.bme.aut.todolist.TodoListApplication;
-import hu.bme.aut.todolist.model.Item;
+import hu.bme.aut.todolist.model.Task;
 import hu.bme.aut.todolist.ui.details.DetailsActivity;
 
 public class MainActivity extends AppCompatActivity implements MainScreen {
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
 
     @Inject
     MainPresenter mainPresenter;
-    private List<Item> tasksList;
+    private List<Task> tasksList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     }
 
     @Override
-    public void showTasks(List<Item> items) {
+    public void showTasks(List<Task> Tasks) {
 
     }
 

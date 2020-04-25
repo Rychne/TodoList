@@ -2,11 +2,11 @@ package hu.bme.aut.todolist.ui.main;
 
 import java.util.List;
 
-import hu.bme.aut.todolist.model.Item;
+import hu.bme.aut.todolist.model.Task;
 
 public interface MainScreen {
 
-    void showTasks(List<Item> items);
+    void showTasks(List<Task> items);
     void showTaskDetails(String taskId);
 
 }
