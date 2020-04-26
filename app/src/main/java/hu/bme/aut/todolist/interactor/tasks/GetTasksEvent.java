@@ -2,18 +2,18 @@ package hu.bme.aut.todolist.interactor.tasks;
 
 import java.util.List;
 
-import hu.bme.aut.todolist.model.Item;
+import hu.bme.aut.todolist.model.Task;
 
 public class GetTasksEvent {
 
     private int code;
-    private List<Item> tasks;
+    private List<Task> tasks;
     private Throwable throwable;
 
     public GetTasksEvent(){
     }
 
-    public GetTasksEvent(int code, List<Item> tasks, Throwable throwable) {
+    public GetTasksEvent(int code, List<Task> tasks, Throwable throwable) {
         this.code = code;
         this.tasks = tasks;
         this.throwable = throwable;
@@ -27,11 +27,11 @@ public class GetTasksEvent {
         this.code = code;
     }
 
-    public List<Item> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<Item> tasks) {
+    public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
 
