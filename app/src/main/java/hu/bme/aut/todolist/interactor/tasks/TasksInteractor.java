@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import hu.bme.aut.todolist.TodoListApplication;
 import hu.bme.aut.todolist.model.TaskList;
 import hu.bme.aut.todolist.network.TaskApi;
+import hu.bme.aut.todolist.orm.TodoDataBase;
 import retrofit2.Call;
 import retrofit2.Response;
 
@@ -17,10 +18,12 @@ import static hu.bme.aut.todolist.network.NetworkConfig.TOKEN;
 public class TasksInteractor {
 
     private final TaskApi taskApi;
+    private final TodoDataBase db;
 
     @Inject
-    public TasksInteractor(TaskApi taskApi) {
+    public TasksInteractor(TaskApi taskApi, TodoDataBase dataBase) {
         this.taskApi = taskApi;
+        this.db = dataBase;
         TodoListApplication.injector.inject(this);
     }
 

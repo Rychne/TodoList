@@ -13,6 +13,12 @@
 
 package hu.bme.aut.todolist.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
@@ -22,89 +28,120 @@ import java.util.Objects;
 /**
  * Task
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaClientCodegen", date = "2020-04-25T09:14:30.739+02:00")
+@Entity
 public class Task {
+  @PrimaryKey
+  @NonNull
   @SerializedName("id")
   private String id = null;
 
-  @SerializedName("badges")
-  private Object badges = null;
-
-  @SerializedName("checkItemStates")
-  private List<String> checkItemStates = null;
-
-  @SerializedName("closed")
-  private Boolean closed = null;
-
-  @SerializedName("dateLastActivity")
-  private String dateLastActivity = null;
-
-  @SerializedName("desc")
-  private String desc = null;
-
-  @SerializedName("descData")
-  private Object descData = null;
-
-  @SerializedName("due")
-  private String due = null;
-
-  @SerializedName("dueComplete")
-  private Boolean dueComplete = null;
-
-  @SerializedName("idAttachmentCover")
-  private String idAttachmentCover = null;
-
-  @SerializedName("idBoard")
-  private String idBoard = null;
-
-  @SerializedName("idCheckLists")
-  private List<String> idCheckLists = null;
-
-  @SerializedName("idLabels")
-  private List<String> idLabels = null;
-
-  @SerializedName("idList")
-  private String idList = null;
-
-  @SerializedName("idMembers")
-  private List<String> idMembers = null;
-
-  @SerializedName("idMembersVoted")
-  private List<String> idMembersVoted = null;
-
-  @SerializedName("idShort")
-  private Integer idShort = null;
-
-  @SerializedName("labels")
-  private List<Label> labels = null;
-
-  @SerializedName("manualCoverAttachment")
-  private Boolean manualCoverAttachment = null;
-
+  @ColumnInfo(name = "name")
   @SerializedName("name")
   private String name = null;
 
+  @ColumnInfo(name = "desc")
+  @SerializedName("desc")
+  private String desc = null;
+
+  @ColumnInfo(name = "dueComplete")
+  @SerializedName("dueComplete")
+  private Boolean dueComplete = null;
+
+
+
+  @Ignore
+  @SerializedName("badges")
+  private Object badges = null;
+
+  @Ignore
+  @SerializedName("checkItemStates")
+  private List<String> checkItemStates = null;
+
+  @Ignore
+  @SerializedName("closed")
+  private Boolean closed = null;
+
+  @Ignore
+  @SerializedName("dateLastActivity")
+  private String dateLastActivity = null;
+
+  @Ignore
+  @SerializedName("descData")
+  private Object descData = null;
+
+  @Ignore
+  @SerializedName("due")
+  private String due = null;
+
+  @Ignore
+  @SerializedName("idAttachmentCover")
+  private String idAttachmentCover = null;
+
+  @Ignore
+  @SerializedName("idBoard")
+  private String idBoard = null;
+
+  @Ignore
+  @SerializedName("idCheckLists")
+  private List<String> idCheckLists = null;
+
+  @Ignore
+  @SerializedName("idLabels")
+  private List<String> idLabels = null;
+
+  @Ignore
+  @SerializedName("idList")
+  private String idList = null;
+
+  @Ignore
+  @SerializedName("idMembers")
+  private List<String> idMembers = null;
+
+  @Ignore
+  @SerializedName("idMembersVoted")
+  private List<String> idMembersVoted = null;
+
+  @Ignore
+  @SerializedName("idShort")
+  private Integer idShort = null;
+
+  @Ignore
+  @SerializedName("labels")
+  private List<Label> labels = null;
+
+  @Ignore
+  @SerializedName("manualCoverAttachment")
+  private Boolean manualCoverAttachment = null;
+
+  @Ignore
   @SerializedName("pos")
   private Float pos = null;
 
+  @Ignore
   @SerializedName("shortLink")
   private String shortLink = null;
 
+  @Ignore
   @SerializedName("shortUrl")
   private String shortUrl = null;
 
+  @Ignore
   @SerializedName("subscribed")
   private Boolean subscribed = null;
 
+  @Ignore
   @SerializedName("url")
   private String url = null;
 
+  @Ignore
   @SerializedName("address")
   private String address = null;
 
+  @Ignore
   @SerializedName("locationName")
   private String locationName = null;
 
+  @Ignore
   @SerializedName("coordinates")
   private Object coordinates = null;
 

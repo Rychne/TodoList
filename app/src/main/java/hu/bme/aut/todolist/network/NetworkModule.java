@@ -10,6 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class NetworkModule {
 
+
     @Provides
     @Singleton
     public Retrofit.Builder provideRetrofit() {
@@ -20,7 +21,7 @@ public class NetworkModule {
 
     @Provides
     @Singleton
-    public TaskApi provideArtistsApi(Retrofit.Builder retrofitBuilder) {
+    public TaskApi provideTaskApi(Retrofit.Builder retrofitBuilder) {
         return retrofitBuilder.baseUrl(NetworkConfig.ENDPOINT_ADDRESS).build().create(TaskApi.class);
     }
 

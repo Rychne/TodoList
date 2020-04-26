@@ -6,12 +6,14 @@ import dagger.Component;
 import hu.bme.aut.todolist.interactor.details.DetailsInteractor;
 import hu.bme.aut.todolist.interactor.tasks.TasksInteractor;
 import hu.bme.aut.todolist.network.NetworkModule;
+import hu.bme.aut.todolist.orm.ORMModule;
+import hu.bme.aut.todolist.orm.TodoDataBase;
 import hu.bme.aut.todolist.ui.UIModule;
 import hu.bme.aut.todolist.ui.details.DetailsActivity;
 import hu.bme.aut.todolist.ui.main.MainActivity;
 
 @Singleton
-@Component(modules = {UIModule.class, NetworkModule.class})
+@Component(modules = {UIModule.class, NetworkModule.class, ORMModule.class})
 public interface TodoListApplicationComponent {
 
     void inject(MainActivity mainActivity);
