@@ -145,6 +145,14 @@ public class Task {
   @SerializedName("coordinates")
   private Object coordinates = null;
 
+  public Task(){}
+
+  public Task(String name, String desc) {
+    this.name = name;
+    this.desc = desc;
+    this.setDueComplete(false);
+  }
+
   public Task id(String id) {
     this.id = id;
     return this;

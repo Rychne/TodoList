@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TodoList</string>
+    <string name="dialog_title">Create Task</string>
+    <string name="dialog_input_1">Task</string>
+    <string name="dialog_input_2">Details</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>

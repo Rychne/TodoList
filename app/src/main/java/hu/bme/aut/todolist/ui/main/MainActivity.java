@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     private List<Task> tasksList;
     private RecyclerView recyclerView;
     private TaskRecyclerViewAdapter adapter;
+    private FloatingActionButton createTaskButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +40,31 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         TodoListApplication.injector.inject(this);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        tasksList = new ArrayList<>();
+
+        Task task = new Task();
+        task.setName("Paint the flat");
+        task.setId("24332");
+        task.setDueComplete(false);
+        Task task1 = new Task();
+        task1.setName("Paint the kitchen");
+        task1.setId("24332");
+        task1.setDueComplete(true);
+        tasksList = Arrays.asList(task, task, task, task1);
+
+//        tasksList = new ArrayList<>();
         adapter = new TaskRecyclerViewAdapter(tasksList);
         recyclerView = findViewById(R.id.task_list);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        createTaskButton = findViewById(R.id.create_float_button);
+        createTaskButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new TaskDialogFragment().show(getSupportFragmentManager(), TaskDialogFragment.TAG);
+            }
+        });
+
     }
 
     @Override
