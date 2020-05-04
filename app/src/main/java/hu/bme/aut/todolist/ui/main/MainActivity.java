@@ -1,10 +1,15 @@
 package hu.bme.aut.todolist.ui.main;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -21,12 +26,21 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     @Inject
     MainPresenter mainPresenter;
     private List<Task> tasksList;
+    private RecyclerView recyclerView;
+    private TaskRecyclerViewAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         TodoListApplication.injector.inject(this);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        tasksList = new ArrayList<>();
+        adapter = new TaskRecyclerViewAdapter(tasksList);
+        recyclerView = findViewById(R.id.task_list);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
