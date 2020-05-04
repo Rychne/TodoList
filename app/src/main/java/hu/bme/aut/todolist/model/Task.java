@@ -147,6 +147,7 @@ public class Task {
 
   public Task(){}
 
+  @Ignore
   public Task(String name, String desc) {
     this.name = name;
     this.desc = desc;

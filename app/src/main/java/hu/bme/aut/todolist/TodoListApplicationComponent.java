@@ -13,6 +13,7 @@ import hu.bme.aut.todolist.ui.details.DetailsActivity;
 import hu.bme.aut.todolist.ui.main.MainActivity;
 import hu.bme.aut.todolist.ui.main.MainPresenter;
 import hu.bme.aut.todolist.ui.main.TaskDialogFragment;
+import hu.bme.aut.todolist.ui.main.TaskRecyclerViewAdapter;
 
 @Singleton
 @Component(modules = {UIModule.class, NetworkModule.class, ORMModule.class})
@@ -26,4 +27,6 @@ public interface TodoListApplicationComponent {
     void inject(DetailsInteractor detailsInteractor);
 
     void inject(TaskDialogFragment taskDialogFragment);
+
+    void inject(TaskRecyclerViewAdapter taskRecyclerViewAdapter);
 }

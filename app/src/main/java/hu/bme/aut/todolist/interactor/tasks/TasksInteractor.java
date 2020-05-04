@@ -2,12 +2,15 @@ package hu.bme.aut.todolist.interactor.tasks;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import hu.bme.aut.todolist.TodoListApplication;
 import hu.bme.aut.todolist.model.Task;
 import hu.bme.aut.todolist.model.TaskList;
 import hu.bme.aut.todolist.network.TaskApi;
+import hu.bme.aut.todolist.orm.TaskDAO;
 import hu.bme.aut.todolist.orm.TodoDataBase;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -62,5 +65,15 @@ public class TasksInteractor {
             event.setThrowable(e);
             EventBus.getDefault().post(event);
         }
+    }
+
+    public void updateTask(Task task) {
+        db.taskDAO().update(task);
+        //TODO
+    }
+
+    public void delete(Task task) {
+        db.taskDAO().delete(task);
+        //TODO
     }
 }

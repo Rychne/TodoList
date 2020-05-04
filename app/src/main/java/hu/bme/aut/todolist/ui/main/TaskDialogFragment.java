@@ -14,6 +14,7 @@ import javax.inject.Inject;
 
 import hu.bme.aut.todolist.R;
 import hu.bme.aut.todolist.TodoListApplication;
+import hu.bme.aut.todolist.model.Task;
 
 public class TaskDialogFragment extends DialogFragment {
     public static final String TAG = TaskDialogFragment.class.getSimpleName();
@@ -41,7 +42,8 @@ public class TaskDialogFragment extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         //TODO input validation
-                        mainPresenter.createTask(String.valueOf(mInput1.getText()), String.valueOf(mInput2.getText()));
+                        Task task = new Task(String.valueOf(mInput1.getText()), String.valueOf(mInput2.getText()));
+                        mainPresenter.createTask(task);
                     }
                 })
                 .setNegativeButton(R.string.cancel, null)
