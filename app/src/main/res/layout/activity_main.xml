@@ -25,5 +25,14 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context=".ui.main.TaskFragment"
         tools:listitem="@layout/task_list_item" />
+    
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/create_float_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/add_white"/>
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
