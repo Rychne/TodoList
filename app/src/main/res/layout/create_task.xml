@@ -8,21 +8,25 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size"
         android:text="@string/dialog_input_1" />
 
     <EditText
         android:id="@+id/dialog_input_1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size"
         android:text="@string/dialog_input_2" />
 
     <EditText
         android:id="@+id/dialog_input_2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size" />
 
 </LinearLayout>
