@@ -51,6 +51,7 @@ public class TasksInteractor {
     }
 
     public void createTask(Task task) {
+        task.setIdList(LIST_ID);
         Call<Void> createTaskQueryCall = taskApi.createTask(LIST_ID, task, API_KEY, TOKEN);
         CreateTaskEvent event = new CreateTaskEvent();
         try {
