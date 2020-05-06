@@ -8,9 +8,7 @@ import javax.inject.Inject;
 
 import hu.bme.aut.todolist.TodoListApplication;
 import hu.bme.aut.todolist.model.Task;
-import hu.bme.aut.todolist.model.TaskList;
 import hu.bme.aut.todolist.network.TaskApi;
-import hu.bme.aut.todolist.orm.TaskDAO;
 import hu.bme.aut.todolist.orm.TodoDataBase;
 import retrofit2.Call;
 import retrofit2.Response;
@@ -34,15 +32,15 @@ public class TasksInteractor {
     }
 
     public void getTasks() {
-        Call<TaskList> getAllTasksQueryCall = taskApi.getTasks(BOARD_ID, API_KEY, TOKEN);
+        Call<List<Task>> getAllTasksQueryCall = taskApi.getTasks(BOARD_ID, API_KEY, TOKEN);
         GetTasksEvent event = new GetTasksEvent();
         try {
-            Response<TaskList> response = getAllTasksQueryCall.execute();
+            Response<List<Task>> response = getAllTasksQueryCall.execute();
             if (response.code() != 200) {
                 throw new Exception("Result code is not 200");
             }
             event.setCode(response.code());
-            event.setTasks(response.body().getTasks());
+            event.setTasks(response.body());
             EventBus.getDefault().post(event);
         } catch (Exception e) {
             event.setThrowable(e);

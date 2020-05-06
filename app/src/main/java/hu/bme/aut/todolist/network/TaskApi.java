@@ -1,7 +1,8 @@
 package hu.bme.aut.todolist.network;
 
+import java.util.List;
+
 import hu.bme.aut.todolist.model.Task;
-import hu.bme.aut.todolist.model.TaskList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.http.Body;
@@ -110,7 +111,7 @@ public interface TaskApi {
    */
   
   @GET("boards/{boardId}/cards/")
-  Call<TaskList> getTasks(
+  Call<List<Task>> getTasks(
     @Path("boardId") String boardId, @Query("key") String key, @Query("token") String token
   );
 
@@ -125,7 +126,7 @@ public interface TaskApi {
   
   @GET("boards/{boardId}/cards/")
   Call<Void> getTasks(
-    @Path("boardId") String boardId, @Query("key") String key, @Query("token") String token, Callback<TaskList> cb
+    @Path("boardId") String boardId, @Query("key") String key, @Query("token") String token, Callback<List<Task>> cb
   );
   /**
    * Updates a task
