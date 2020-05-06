@@ -1,4 +1,4 @@
-package hu.bme.aut.todolist.interactor.tasks;
+package hu.bme.aut.todolist.interactor.tasks.events;
 
 import java.util.List;
 

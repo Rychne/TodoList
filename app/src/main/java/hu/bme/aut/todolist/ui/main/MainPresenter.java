@@ -1,5 +1,7 @@
 package hu.bme.aut.todolist.ui.main;
 
+import android.util.Log;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -10,9 +12,10 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import hu.bme.aut.todolist.TodoListApplication;
-import hu.bme.aut.todolist.TodoListApplicationComponent;
-import hu.bme.aut.todolist.interactor.tasks.GetTasksEvent;
+import hu.bme.aut.todolist.interactor.tasks.events.DeleteTaskEvent;
+import hu.bme.aut.todolist.interactor.tasks.events.GetTasksEvent;
 import hu.bme.aut.todolist.interactor.tasks.TasksInteractor;
+import hu.bme.aut.todolist.interactor.tasks.events.UpdateTaskEvent;
 import hu.bme.aut.todolist.model.Task;
 import hu.bme.aut.todolist.network.Execute;
 import hu.bme.aut.todolist.ui.Presenter;
@@ -81,5 +84,15 @@ public class MainPresenter extends Presenter<MainScreen> {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(final GetTasksEvent event) {
         screen.showTasks(event.getTasks());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(final UpdateTaskEvent event) {
+        screen.updateTask(event.getTask());
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onDeleteTaskEventMainThread(final DeleteTaskEvent event) {
+        screen.removeTask(event.getTaskId());
     }
 }

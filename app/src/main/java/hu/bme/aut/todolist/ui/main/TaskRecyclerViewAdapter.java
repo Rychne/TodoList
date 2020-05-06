@@ -40,6 +40,22 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
         notifyDataSetChanged();
     }
 
+    public void remove(String taskId) {
+        for(Task task : mTasks) {
+            if( task.getId() == taskId) {
+                mTasks.remove(task);
+                notifyDataSetChanged();
+                return;
+            }
+        }
+    }
+
+    public void add(Task task) {
+        mTasks.remove(task);
+        mTasks.add(task);
+        notifyDataSetChanged();
+    }
+
     public void clear() {
         mTasks.clear();
     }

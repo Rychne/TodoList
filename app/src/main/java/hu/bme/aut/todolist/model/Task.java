@@ -688,34 +688,7 @@ public class Task {
       return false;
     }
     Task task = (Task) o;
-    return Objects.equals(this.id, task.id) &&
-        Objects.equals(this.badges, task.badges) &&
-        Objects.equals(this.checkItemStates, task.checkItemStates) &&
-        Objects.equals(this.closed, task.closed) &&
-        Objects.equals(this.dateLastActivity, task.dateLastActivity) &&
-        Objects.equals(this.desc, task.desc) &&
-        Objects.equals(this.descData, task.descData) &&
-        Objects.equals(this.due, task.due) &&
-        Objects.equals(this.dueComplete, task.dueComplete) &&
-        Objects.equals(this.idAttachmentCover, task.idAttachmentCover) &&
-        Objects.equals(this.idBoard, task.idBoard) &&
-        Objects.equals(this.idCheckLists, task.idCheckLists) &&
-        Objects.equals(this.idLabels, task.idLabels) &&
-        Objects.equals(this.idList, task.idList) &&
-        Objects.equals(this.idMembers, task.idMembers) &&
-        Objects.equals(this.idMembersVoted, task.idMembersVoted) &&
-        Objects.equals(this.idShort, task.idShort) &&
-        Objects.equals(this.labels, task.labels) &&
-        Objects.equals(this.manualCoverAttachment, task.manualCoverAttachment) &&
-        Objects.equals(this.name, task.name) &&
-        Objects.equals(this.pos, task.pos) &&
-        Objects.equals(this.shortLink, task.shortLink) &&
-        Objects.equals(this.shortUrl, task.shortUrl) &&
-        Objects.equals(this.subscribed, task.subscribed) &&
-        Objects.equals(this.url, task.url) &&
-        Objects.equals(this.address, task.address) &&
-        Objects.equals(this.locationName, task.locationName) &&
-        Objects.equals(this.coordinates, task.coordinates);
+    return Objects.equals(this.id, task.id);
   }
 
   @Override

@@ -7,6 +7,9 @@ import java.util.List;
 import javax.inject.Inject;
 
 import hu.bme.aut.todolist.TodoListApplication;
+import hu.bme.aut.todolist.interactor.tasks.events.DeleteTaskEvent;
+import hu.bme.aut.todolist.interactor.tasks.events.UpdateTaskEvent;
+import hu.bme.aut.todolist.interactor.tasks.events.GetTasksEvent;
 import hu.bme.aut.todolist.model.Task;
 import hu.bme.aut.todolist.network.TaskApi;
 import hu.bme.aut.todolist.orm.TodoDataBase;
@@ -51,7 +54,7 @@ public class TasksInteractor {
     public void createTask(Task task) {
         task.setIdList(LIST_ID);
         Call<Void> createTaskQueryCall = taskApi.createTask(LIST_ID, task, API_KEY, TOKEN);
-        CreateTaskEvent event = new CreateTaskEvent();
+        UpdateTaskEvent event = new UpdateTaskEvent();
         try {
             Response<Void> response = createTaskQueryCall.execute();
             if (response.code() != 200) {
@@ -67,12 +70,42 @@ public class TasksInteractor {
     }
 
     public void updateTask(Task task) {
-        db.taskDAO().update(task);
+//        db.taskDAO().update(task);
         //TODO
+        Call<Void> updateTaskQueryCall = taskApi.updateTask(task.getId(), task, API_KEY, TOKEN);
+        UpdateTaskEvent event = new UpdateTaskEvent();
+        try {
+            Response<Void> response = updateTaskQueryCall.execute();
+            if (response.code() != 200) {
+                throw new Exception("Result code is not 200");
+            }
+            event.setCode(response.code());
+            event.setTask(task);
+            EventBus.getDefault().post(event);
+        } catch (Exception e) {
+            e.printStackTrace();
+            event.setThrowable(e);
+            EventBus.getDefault().post(event);
+        }
     }
 
     public void delete(Task task) {
-        db.taskDAO().delete(task);
+//        db.taskDAO().delete(task);
         //TODO
+        Call<Void> deleteTaskQueryCall = taskApi.deleteTask(task.getId(), API_KEY, TOKEN);
+        DeleteTaskEvent event = new DeleteTaskEvent();
+        try {
+            Response<Void> response = deleteTaskQueryCall.execute();
+            if (response.code() != 200) {
+                throw new Exception("Result code is not 200");
+            }
+            event.setCode(response.code());
+            event.setTaskId(task.getId());
+            EventBus.getDefault().post(event);
+        } catch (Exception e) {
+            e.printStackTrace();
+            event.setThrowable(e);
+            EventBus.getDefault().post(event);
+        }
     }
 }

@@ -73,4 +73,14 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         adapter.addTasks(tasks);
     }
 
+    @Override
+    public void removeTask(String taskId) {
+        adapter.remove(taskId);
+    }
+
+    @Override
+    public void updateTask(Task task) {
+        adapter.add(task);
+    }
+
 }
