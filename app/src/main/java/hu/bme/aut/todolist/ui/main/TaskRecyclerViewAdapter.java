@@ -1,5 +1,6 @@
 package hu.bme.aut.todolist.ui.main;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +19,12 @@ import javax.inject.Inject;
 import hu.bme.aut.todolist.R;
 import hu.bme.aut.todolist.TodoListApplication;
 import hu.bme.aut.todolist.model.Task;
+import hu.bme.aut.todolist.ui.details.DetailsActivity;
+
+import static hu.bme.aut.todolist.ui.details.DetailsActivity.KEY_TASK_ID;
 
 public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerViewAdapter.ViewHolder> {
+    public static final String TAG = TaskRecyclerViewAdapter.class.getSimpleName();
 
     private final List<Task> mTasks;
     @Inject
@@ -28,6 +33,15 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
     public TaskRecyclerViewAdapter(List<Task> items) {
         mTasks = items;
         TodoListApplication.injector.inject(this);
+    }
+
+    public void addTasks(List<Task> tasks) {
+        mTasks.addAll(tasks);
+        notifyDataSetChanged();
+    }
+
+    public void clear() {
+        mTasks.clear();
     }
 
     @Override
@@ -77,6 +91,16 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
                 public void onClick(View v) {
                     if(mItem != null) {
                         mainPresenter.deleteTask(mItem);
+                    }
+                }
+            });
+            mNameTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(mItem != null) {
+                        Intent intent = new Intent(mView.getContext(), DetailsActivity.class);
+                        intent.putExtra(KEY_TASK_ID, mItem.getId());
+                        mView.getContext().startActivity(intent);
                     }
                 }
             });

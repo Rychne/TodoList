@@ -12,7 +12,6 @@ import android.view.View;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -20,11 +19,9 @@ import javax.inject.Inject;
 import hu.bme.aut.todolist.R;
 import hu.bme.aut.todolist.TodoListApplication;
 import hu.bme.aut.todolist.model.Task;
-import hu.bme.aut.todolist.ui.details.DetailsActivity;
 
 public class MainActivity extends AppCompatActivity implements MainScreen {
 
-    public static final String KEY_TASK_ID = "KEY_TASK_ID";
 
     @Inject
     MainPresenter mainPresenter;
@@ -41,17 +38,7 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Task task = new Task();
-        task.setName("Paint the flat");
-        task.setId("24332");
-        task.setDueComplete(false);
-        Task task1 = new Task();
-        task1.setName("Paint the kitchen");
-        task1.setId("24332");
-        task1.setDueComplete(true);
-        tasksList = Arrays.asList(task, task, task, task1);
-
-//        tasksList = new ArrayList<>();
+        tasksList = new ArrayList<>();
         adapter = new TaskRecyclerViewAdapter(tasksList);
         recyclerView = findViewById(R.id.task_list);
         recyclerView.setAdapter(adapter);
@@ -70,8 +57,8 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     @Override
     public void onResume() {
         super.onResume();
-        mainPresenter.refreshTasks();
         mainPresenter.attachScreen(this);
+        mainPresenter.refreshTasks();
     }
 
     @Override
@@ -81,14 +68,9 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     }
 
     @Override
-    public void showTasks(List<Task> Tasks) {
-
+    public void showTasks(List<Task> tasks) {
+        adapter.clear();
+        adapter.addTasks(tasks);
     }
 
-    @Override
-    public void showTaskDetails(String taskId) {
-        Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-        intent.putExtra(KEY_TASK_ID, taskId);
-        startActivity(intent);
-    }
 }
