@@ -10,6 +10,7 @@ import hu.bme.aut.todolist.orm.ORMModule;
 import hu.bme.aut.todolist.orm.TodoDataBase;
 import hu.bme.aut.todolist.ui.UIModule;
 import hu.bme.aut.todolist.ui.details.DetailsActivity;
+import hu.bme.aut.todolist.ui.details.DetailsPresenter;
 import hu.bme.aut.todolist.ui.main.MainActivity;
 import hu.bme.aut.todolist.ui.main.MainPresenter;
 import hu.bme.aut.todolist.ui.main.TaskDialogFragment;
@@ -29,4 +30,6 @@ public interface TodoListApplicationComponent {
     void inject(TaskDialogFragment taskDialogFragment);
 
     void inject(TaskRecyclerViewAdapter taskRecyclerViewAdapter);
+
+    void inject(DetailsPresenter detailsPresenter);
 }
