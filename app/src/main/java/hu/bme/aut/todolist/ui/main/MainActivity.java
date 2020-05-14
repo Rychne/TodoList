@@ -5,7 +5,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -74,13 +73,18 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     }
 
     @Override
+    public void addTask(Task task) {
+        adapter.add(task);
+    }
+
+    @Override
     public void removeTask(String taskId) {
         adapter.remove(taskId);
     }
 
     @Override
     public void updateTask(Task task) {
-        adapter.add(task);
+        adapter.update(task);
     }
 
 }

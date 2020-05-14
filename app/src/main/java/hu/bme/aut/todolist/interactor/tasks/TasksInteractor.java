@@ -8,8 +8,9 @@ import javax.inject.Inject;
 
 import hu.bme.aut.todolist.TodoListApplication;
 import hu.bme.aut.todolist.interactor.tasks.events.DeleteTaskEvent;
-import hu.bme.aut.todolist.interactor.tasks.events.UpdateTaskEvent;
+import hu.bme.aut.todolist.interactor.tasks.events.CreateTaskEvent;
 import hu.bme.aut.todolist.interactor.tasks.events.GetTasksEvent;
+import hu.bme.aut.todolist.interactor.tasks.events.UpdateTaskEvent;
 import hu.bme.aut.todolist.model.Task;
 import hu.bme.aut.todolist.network.TaskApi;
 import hu.bme.aut.todolist.orm.TodoDataBase;
@@ -53,14 +54,15 @@ public class TasksInteractor {
 
     public void createTask(Task task) {
         task.setIdList(LIST_ID);
-        Call<Void> createTaskQueryCall = taskApi.createTask(LIST_ID, task, API_KEY, TOKEN);
-        UpdateTaskEvent event = new UpdateTaskEvent();
+        Call<Task> createTaskQueryCall = taskApi.createTask(LIST_ID, task, API_KEY, TOKEN);
+        CreateTaskEvent event = new CreateTaskEvent();
         try {
-            Response<Void> response = createTaskQueryCall.execute();
+            Response<Task> response = createTaskQueryCall.execute();
             if (response.code() != 200) {
                 throw new Exception("Result code is not 200");
             }
             event.setCode(response.code());
+            event.setTask(response.body());
             EventBus.getDefault().post(event);
         } catch (Exception e) {
             e.printStackTrace();

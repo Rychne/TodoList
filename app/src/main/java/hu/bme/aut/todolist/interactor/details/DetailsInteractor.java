@@ -44,10 +44,10 @@ public class DetailsInteractor {
     }
 
     public void createTask(Task task) {
-        Call<Void> createTaskQueryCall = taskApi.createTask(LIST_ID, task, API_KEY, TOKEN);
+        Call<Task> createTaskQueryCall = taskApi.createTask(LIST_ID, task, API_KEY, TOKEN);
         CreateUpdateDeleteTaskEvent event = new CreateUpdateDeleteTaskEvent();
         try {
-            Response<Void> response = createTaskQueryCall.execute();
+            Response<Task> response = createTaskQueryCall.execute();
             if (response.code() != 200) {
                 throw new Exception("Result code is not 200");
             }

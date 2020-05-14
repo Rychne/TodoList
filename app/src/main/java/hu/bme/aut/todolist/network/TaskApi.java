@@ -26,7 +26,7 @@ public interface TaskApi {
    */
   
   @POST("cards")
-  Call<Void> createTask(
+  Call<Task> createTask(
     @Query("idList") String listId, @Body Task body, @Query("key") String key, @Query("token") String token
   );
 
@@ -41,7 +41,7 @@ public interface TaskApi {
    */
   
   @POST("cards")
-  Call<Void> createTask(
+  Call<Task> createTask(
     @Query("idList") String listId, @Body Task body, @Query("key") String key, @Query("token") String token, Callback<Call<Void>> cb
   );
   /**

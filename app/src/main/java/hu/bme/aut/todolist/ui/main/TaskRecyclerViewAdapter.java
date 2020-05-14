@@ -51,6 +51,11 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
     }
 
     public void add(Task task) {
+        mTasks.add(task);
+        notifyDataSetChanged();
+    }
+
+    public void update(Task task) {
         mTasks.remove(task);
         mTasks.add(task);
         notifyDataSetChanged();
@@ -69,9 +74,21 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
+        holder.mDoneCheckBox.setOnCheckedChangeListener(null);
         holder.mItem = mTasks.get(position);
         holder.mNameTextView.setText(mTasks.get(position).getName());
         holder.mDoneCheckBox.setChecked(mTasks.get(position).isDueComplete());
+        holder.mDoneCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(holder.mItem != null) {
+                    Task task = new Task(holder.mItem.getName(), holder.mItem.getDesc());
+                    task.setId(holder.mItem.getId());
+                    task.setDueComplete(isChecked);
+                    mainPresenter.updateTask(task);
+                }
+            }
+        });
         holder.mDeleteButton.setVisibility(mTasks.get(position).isDueComplete() ? View.VISIBLE : View.GONE);
     }
 
@@ -92,15 +109,6 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
             mView = view;
             mNameTextView = view.findViewById(R.id.name_text_view);
             mDoneCheckBox = view.findViewById(R.id.done_checkbox);
-            mDoneCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(mItem != null) {
-                        mItem.setDueComplete(isChecked);
-                        mainPresenter.updateTask(mItem);
-                    }
-                }
-            });
             mDeleteButton = view.findViewById(R.id.delete_button);
             mDeleteButton.setOnClickListener(new View.OnClickListener() {
                 @Override

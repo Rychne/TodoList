@@ -8,6 +8,8 @@ public interface MainScreen {
 
     void showTasks(List<Task> items);
 
+    void addTask(Task item);
+
     void removeTask(String taskId);
 
     void updateTask(Task task);
