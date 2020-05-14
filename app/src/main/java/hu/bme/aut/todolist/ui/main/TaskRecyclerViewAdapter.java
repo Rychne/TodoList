@@ -27,16 +27,33 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
     public static final String TAG = TaskRecyclerViewAdapter.class.getSimpleName();
 
     private final List<Task> mTasks;
+    private int notCompletedItemsCount;
     @Inject
     MainPresenter mainPresenter;
 
     public TaskRecyclerViewAdapter(List<Task> items) {
         mTasks = items;
+        notCompletedItemsCount = mTasks.size();
+        for(Task task : mTasks) {
+            if(task.isDueComplete()) {
+                notCompletedItemsCount--;
+            }
+        }
+        Log.d(TAG, "Not completed items coutn: " + notCompletedItemsCount );
         TodoListApplication.injector.inject(this);
     }
 
     public void addTasks(List<Task> tasks) {
-        mTasks.addAll(tasks);
+        notCompletedItemsCount += tasks.size();
+        for(Task task : tasks) {
+            if(task.isDueComplete()) {
+                notCompletedItemsCount--;
+                mTasks.add(mTasks.size(), task);
+            } else {
+                mTasks.add(0, task);
+            }
+        }
+        Log.d(TAG, "Not completed items coutn: " + notCompletedItemsCount );
         notifyDataSetChanged();
     }
 
@@ -51,13 +68,21 @@ public class TaskRecyclerViewAdapter extends RecyclerView.Adapter<TaskRecyclerVi
     }
 
     public void add(Task task) {
-        mTasks.add(task);
+        mTasks.add(0, task);
         notifyDataSetChanged();
     }
 
     public void update(Task task) {
         mTasks.remove(task);
-        mTasks.add(task);
+        if(!task.isDueComplete()) {
+            notCompletedItemsCount++;
+            mTasks.add(notCompletedItemsCount - 1, task);
+            Log.d(TAG, "Not completed items coutn: " + notCompletedItemsCount );
+        } else {
+            notCompletedItemsCount--;
+            Log.d(TAG, "Not completed items coutn: " + notCompletedItemsCount );
+            mTasks.add(notCompletedItemsCount, task);
+        }
         notifyDataSetChanged();
     }
 
