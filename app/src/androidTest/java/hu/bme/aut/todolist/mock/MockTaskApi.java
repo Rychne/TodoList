@@ -1,7 +1,6 @@
 package hu.bme.aut.todolist.mock;
 
 import hu.bme.aut.todolist.model.Task;
-import hu.bme.aut.todolist.model.TaskList;
 import hu.bme.aut.todolist.network.TaskApi;
 import retrofit2.Call;
 import retrofit2.Callback;

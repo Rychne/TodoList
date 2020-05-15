@@ -2,10 +2,16 @@ package hu.bme.aut.todolist.interactor.tasks;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import hu.bme.aut.todolist.TodoListApplication;
-import hu.bme.aut.todolist.model.TaskList;
+import hu.bme.aut.todolist.interactor.tasks.events.DeleteTaskEvent;
+import hu.bme.aut.todolist.interactor.tasks.events.CreateTaskEvent;
+import hu.bme.aut.todolist.interactor.tasks.events.GetTasksEvent;
+import hu.bme.aut.todolist.interactor.tasks.events.UpdateTaskEvent;
+import hu.bme.aut.todolist.model.Task;
 import hu.bme.aut.todolist.network.TaskApi;
 import hu.bme.aut.todolist.orm.TodoDataBase;
 import retrofit2.Call;
@@ -13,9 +19,11 @@ import retrofit2.Response;
 
 import static hu.bme.aut.todolist.network.NetworkConfig.API_KEY;
 import static hu.bme.aut.todolist.network.NetworkConfig.BOARD_ID;
+import static hu.bme.aut.todolist.network.NetworkConfig.LIST_ID;
 import static hu.bme.aut.todolist.network.NetworkConfig.TOKEN;
 
 public class TasksInteractor {
+    private static final String TAG = TasksInteractor.class.getSimpleName();
 
     private final TaskApi taskApi;
     private final TodoDataBase db;
@@ -28,17 +36,76 @@ public class TasksInteractor {
     }
 
     public void getTasks() {
-        Call<TaskList> getAllTasksQueryCall = taskApi.getTasks(BOARD_ID, API_KEY, TOKEN);
+        Call<List<Task>> getAllTasksQueryCall = taskApi.getTasks(BOARD_ID, API_KEY, TOKEN);
         GetTasksEvent event = new GetTasksEvent();
         try {
-            Response<TaskList> response = getAllTasksQueryCall.execute();
+            Response<List<Task>> response = getAllTasksQueryCall.execute();
             if (response.code() != 200) {
                 throw new Exception("Result code is not 200");
             }
             event.setCode(response.code());
-            event.setTasks(response.body().getTasks());
+            event.setTasks(response.body());
             EventBus.getDefault().post(event);
         } catch (Exception e) {
+            event.setThrowable(e);
+            EventBus.getDefault().post(event);
+        }
+    }
+
+    public void createTask(Task task) {
+        task.setIdList(LIST_ID);
+        Call<Task> createTaskQueryCall = taskApi.createTask(LIST_ID, task, API_KEY, TOKEN);
+        CreateTaskEvent event = new CreateTaskEvent();
+        try {
+            Response<Task> response = createTaskQueryCall.execute();
+            if (response.code() != 200) {
+                throw new Exception("Result code is not 200");
+            }
+            event.setCode(response.code());
+            event.setTask(response.body());
+            EventBus.getDefault().post(event);
+        } catch (Exception e) {
+            e.printStackTrace();
+            event.setThrowable(e);
+            EventBus.getDefault().post(event);
+        }
+    }
+
+    public void updateTask(Task task) {
+//        db.taskDAO().update(task);
+        //TODO
+        Call<Void> updateTaskQueryCall = taskApi.updateTask(task.getId(), task, API_KEY, TOKEN);
+        UpdateTaskEvent event = new UpdateTaskEvent();
+        try {
+            Response<Void> response = updateTaskQueryCall.execute();
+            if (response.code() != 200) {
+                throw new Exception("Result code is not 200");
+            }
+            event.setCode(response.code());
+            event.setTask(task);
+            EventBus.getDefault().post(event);
+        } catch (Exception e) {
+            e.printStackTrace();
+            event.setThrowable(e);
+            EventBus.getDefault().post(event);
+        }
+    }
+
+    public void delete(Task task) {
+//        db.taskDAO().delete(task);
+        //TODO
+        Call<Void> deleteTaskQueryCall = taskApi.deleteTask(task.getId(), API_KEY, TOKEN);
+        DeleteTaskEvent event = new DeleteTaskEvent();
+        try {
+            Response<Void> response = deleteTaskQueryCall.execute();
+            if (response.code() != 200) {
+                throw new Exception("Result code is not 200");
+            }
+            event.setCode(response.code());
+            event.setTaskId(task.getId());
+            EventBus.getDefault().post(event);
+        } catch (Exception e) {
+            e.printStackTrace();
             event.setThrowable(e);
             EventBus.getDefault().post(event);
         }

@@ -1,7 +1,8 @@
 package hu.bme.aut.todolist.network;
 
+import java.util.List;
+
 import hu.bme.aut.todolist.model.Task;
-import hu.bme.aut.todolist.model.TaskList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.http.Body;
@@ -24,9 +25,9 @@ public interface TaskApi {
    * @return Call<Void>
    */
   
-  @POST("/cards")
-  Call<Void> createTask(
-    @Path("listId") String listId, @Body Task body, @Query("key") String key, @Query("token") String token
+  @POST("cards")
+  Call<Task> createTask(
+    @Query("idList") String listId, @Body Task body, @Query("key") String key, @Query("token") String token
   );
 
   /**
@@ -39,9 +40,9 @@ public interface TaskApi {
    * @param cb callback method
    */
   
-  @POST("/cards")
-  Call<Void> createTask(
-    @Path("listId") String listId, @Body Task body, @Query("key") String key, @Query("token") String token, Callback<Call<Void>> cb
+  @POST("cards")
+  Call<Task> createTask(
+    @Query("idList") String listId, @Body Task body, @Query("key") String key, @Query("token") String token, Callback<Call<Void>> cb
   );
   /**
    * Deletes a task
@@ -53,7 +54,7 @@ public interface TaskApi {
    * @return Call<Void>
    */
   
-  @DELETE("/cards/{cardId}")
+  @DELETE("cards/{cardId}")
   Call<Void> deleteTask(
     @Path("cardId") String cardId, @Query("key") String key, @Query("token") String token
   );
@@ -67,7 +68,7 @@ public interface TaskApi {
    * @param cb callback method
    */
   
-  @DELETE("/cards/{cardId}")
+  @DELETE("cards/{cardId}")
   Call<Void> deleteTask(
     @Path("cardId") String cardId, @Query("key") String key, @Query("token") String token, Callback<Call<Void>> cb
   );
@@ -81,7 +82,7 @@ public interface TaskApi {
    * @return Task
    */
   
-  @GET("/cards/{cardId}")
+  @GET("cards/{cardId}")
   Call<Task> getTaskById(
     @Path("cardId") String cardId, @Query("key") String key, @Query("token") String token
   );
@@ -95,7 +96,7 @@ public interface TaskApi {
    * @param cb callback method
    */
   
-  @GET("/cards/{cardId}")
+  @GET("cards/{cardId}")
   Call<Void> getTaskById(
           @Path("cardId") String cardId, @Query("key") String key, @Query("token") String token, Callback<Task> cb
   );
@@ -109,8 +110,8 @@ public interface TaskApi {
    * @return TaskList
    */
   
-  @GET("/boards/{boardId}/cards/")
-  Call<TaskList> getTasks(
+  @GET("boards/{boardId}/cards/")
+  Call<List<Task>> getTasks(
     @Path("boardId") String boardId, @Query("key") String key, @Query("token") String token
   );
 
@@ -123,9 +124,9 @@ public interface TaskApi {
    * @param cb callback method
    */
   
-  @GET("/boards/{boardId}/cards/")
+  @GET("boards/{boardId}/cards/")
   Call<Void> getTasks(
-    @Path("boardId") String boardId, @Query("key") String key, @Query("token") String token, Callback<TaskList> cb
+    @Path("boardId") String boardId, @Query("key") String key, @Query("token") String token, Callback<List<Task>> cb
   );
   /**
    * Updates a task
@@ -138,7 +139,7 @@ public interface TaskApi {
    * @return Call<Void>
    */
   
-  @PUT("/cards/{cardId}")
+  @PUT("cards/{cardId}")
   Call<Void> updateTask(
           @Path("cardId") String cardId, @Body Task body, @Query("key") String key, @Query("token") String token
   );
@@ -153,7 +154,7 @@ public interface TaskApi {
    * @param cb callback method
    */
   
-  @PUT("/cards/{cardId}")
+  @PUT("cards/{cardId}")
   Call<Void> updateTask(
     @Path("cardId") String cardId, @Body Task body, @Query("key") String key, @Query("token") String token, Callback<Call<Void>> cb
   );

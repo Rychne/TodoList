@@ -1,8 +1,11 @@
 package hu.bme.aut.todolist.ui.details;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import javax.inject.Inject;
 
@@ -10,26 +13,30 @@ import hu.bme.aut.todolist.R;
 import hu.bme.aut.todolist.TodoListApplication;
 import hu.bme.aut.todolist.model.Task;
 
-import static hu.bme.aut.todolist.ui.main.MainActivity.KEY_TASK_ID;
-
 public class DetailsActivity extends AppCompatActivity implements DetailsScreen {
 
+    public static final String KEY_TASK_ID = "KEY_TASK_ID";
     @Inject
     DetailsPresenter detailsPresenter;
     private String taskId;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.details_layout);
+        setContentView(R.layout.activity_details);
+
         TodoListApplication.injector.inject(this);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
         taskId = this.getIntent().getStringExtra(KEY_TASK_ID);
-        detailsPresenter.refreshTaskDetails(taskId);
         detailsPresenter.attachScreen(this);
+        detailsPresenter.refreshTaskDetails(taskId);
     }
 
     @Override
@@ -40,6 +47,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
 
     @Override
     public void showTask(Task task) {
-
+        ((TextView) findViewById(R.id.task_name_textview)).setText(task.getName());
+        ((TextView) findViewById(R.id.task_description_textview)).setText(task.getDesc());
     }
 }

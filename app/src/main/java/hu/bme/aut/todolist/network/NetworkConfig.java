@@ -1,7 +1,7 @@
 package hu.bme.aut.todolist.network;
 
 public class NetworkConfig {
-    public static final String ENDPOINT_ADDRESS = "https://api.trello.com/";
+    public static final String ENDPOINT_ADDRESS = "https://api.trello.com/1/";
     public static final String API_KEY = "fd8daa0dff9f6892e4b2596de257b1a7";
     public static final String TOKEN = "c9be22f5e655546c5cdfd9b0223b22fc1c251a9dfc1605b80ebb35ec5b26f3d0";
     //The app uses the Trello REST API,
