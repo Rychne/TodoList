@@ -13,8 +13,45 @@ import retrofit2.Response;
 
 public class MockTaskApi implements TaskApi {
     @Override
-    public Call<Task> createTask(String listId, Task body, String key, String token) {
-        return null;
+    public Call<Task> createTask(String listId, final Task body, String key, String token) {
+        Call<Task> call = new Call<Task>() {
+            @Override
+            public Response<Task> execute() throws IOException {
+                return Response.success(body);
+            }
+
+            @Override
+            public void enqueue(Callback<Task> callback) {
+
+            }
+
+            @Override
+            public boolean isExecuted() {
+                return false;
+            }
+
+            @Override
+            public void cancel() {
+
+            }
+
+            @Override
+            public boolean isCanceled() {
+                return false;
+            }
+
+            @Override
+            public Call<Task> clone() {
+                return null;
+            }
+
+            @Override
+            public Request request() {
+                return null;
+            }
+        };
+
+        return call;
     }
 
     @Override
@@ -24,7 +61,44 @@ public class MockTaskApi implements TaskApi {
 
     @Override
     public Call<Void> deleteTask(String cardId, String key, String token) {
-        return null;
+        Call<Void> call = new Call<Void>() {
+            @Override
+            public Response<Void> execute() throws IOException {
+                return Response.success(null);
+            }
+
+            @Override
+            public void enqueue(Callback<Void> callback) {
+
+            }
+
+            @Override
+            public boolean isExecuted() {
+                return false;
+            }
+
+            @Override
+            public void cancel() {
+
+            }
+
+            @Override
+            public boolean isCanceled() {
+                return false;
+            }
+
+            @Override
+            public Call<Void> clone() {
+                return null;
+            }
+
+            @Override
+            public Request request() {
+                return null;
+            }
+        };
+
+        return call;
     }
 
     @Override
@@ -93,7 +167,44 @@ public class MockTaskApi implements TaskApi {
 
     @Override
     public Call<Void> updateTask(String cardId, Task body, String key, String token) {
-        return null;
+        Call<Void> call = new Call<Void>() {
+            @Override
+            public Response<Void> execute() throws IOException {
+                return Response.success(null);
+            }
+
+            @Override
+            public void enqueue(Callback<Void> callback) {
+
+            }
+
+            @Override
+            public boolean isExecuted() {
+                return false;
+            }
+
+            @Override
+            public void cancel() {
+
+            }
+
+            @Override
+            public boolean isCanceled() {
+                return false;
+            }
+
+            @Override
+            public Call<Void> clone() {
+                return null;
+            }
+
+            @Override
+            public Request request() {
+                return null;
+            }
+        };
+
+        return call;
     }
 
     @Override
