@@ -6,14 +6,16 @@ import androidx.room.Room;
 
 import javax.inject.Singleton;
 
+import dagger.Module;
 import dagger.Provides;
 import hu.bme.aut.todolist.orm.TodoDataBase;
 
+@Module
 public class MockORMModule {
 
     @Provides
     @Singleton
-    public MockTodoDataBase provideDataBase(Context context) {
-        return Room.databaseBuilder(context, MockTodoDataBase.class, "test-db").build();
+    public TodoDataBase provideDataBase(Context context) {
+        return Room.databaseBuilder(context, TodoDataBase.class, "test-db").build();
     }
 }

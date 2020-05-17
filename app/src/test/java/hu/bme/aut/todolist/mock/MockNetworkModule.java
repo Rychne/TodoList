@@ -2,11 +2,13 @@ package hu.bme.aut.todolist.mock;
 
 import javax.inject.Singleton;
 
+import dagger.Module;
 import dagger.Provides;
 import hu.bme.aut.todolist.network.TaskApi;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@Module
 public class MockNetworkModule {
 
     @Provides

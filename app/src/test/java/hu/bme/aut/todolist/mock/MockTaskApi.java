@@ -1,18 +1,24 @@
 package hu.bme.aut.todolist.mock;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import hu.bme.aut.todolist.model.Task;
 import hu.bme.aut.todolist.network.TaskApi;
+import okhttp3.Request;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MockTaskApi implements TaskApi {
     @Override
-    public Call<Void> createTask(String listId, Task body, String key, String token) {
+    public Call<Task> createTask(String listId, Task body, String key, String token) {
         return null;
     }
 
     @Override
-    public Call<Void> createTask(String listId, Task body, String key, String token, Callback<Call<Void>> cb) {
+    public Call<Task> createTask(String listId, Task body, String key, String token, Callback<Call<Void>> cb) {
         return null;
     }
 
@@ -37,12 +43,51 @@ public class MockTaskApi implements TaskApi {
     }
 
     @Override
-    public Call<TaskList> getTasks(String boardId, String key, String token) {
-        return null;
+    public Call<List<Task>> getTasks(String boardId, String key, String token) {
+        final List<Task> tasks = new ArrayList<>();
+        tasks.add(new Task("Testing", "testing getTasks"));
+        Call<List<Task>> call = new Call<List<Task>>() {
+            @Override
+            public Response<List<Task>> execute() throws IOException {
+                return Response.success(tasks);
+            }
+
+            @Override
+            public void enqueue(Callback<List<Task>> callback) {
+
+            }
+
+            @Override
+            public boolean isExecuted() {
+                return false;
+            }
+
+            @Override
+            public void cancel() {
+
+            }
+
+            @Override
+            public boolean isCanceled() {
+                return false;
+            }
+
+            @Override
+            public Call<List<Task>> clone() {
+                return null;
+            }
+
+            @Override
+            public Request request() {
+                return null;
+            }
+        };
+
+        return call;
     }
 
     @Override
-    public Call<Void> getTasks(String boardId, String key, String token, Callback<TaskList> cb) {
+    public Call<Void> getTasks(String boardId, String key, String token, Callback<List<Task>> cb) {
         return null;
     }
 
