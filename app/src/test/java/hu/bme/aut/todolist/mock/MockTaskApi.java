@@ -107,8 +107,47 @@ public class MockTaskApi implements TaskApi {
     }
 
     @Override
-    public Call<Task> getTaskById(String cardId, String key, String token) {
-        return null;
+    public Call<Task> getTaskById(final String cardId, String key, String token) {
+        Call<Task> call = new Call<Task>() {
+            @Override
+            public Response<Task> execute() throws IOException {
+                Task task = new Task();
+                task.setId(cardId);
+                return Response.success(task);
+            }
+
+            @Override
+            public void enqueue(Callback<Task> callback) {
+
+            }
+
+            @Override
+            public boolean isExecuted() {
+                return false;
+            }
+
+            @Override
+            public void cancel() {
+
+            }
+
+            @Override
+            public boolean isCanceled() {
+                return false;
+            }
+
+            @Override
+            public Call<Task> clone() {
+                return null;
+            }
+
+            @Override
+            public Request request() {
+                return null;
+            }
+        };
+
+        return call;
     }
 
     @Override
