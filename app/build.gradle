@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
@@ -60,4 +61,7 @@ dependencies {
     testAnnotationProcessor "com.google.dagger:dagger-compiler:2.21"
     testCompileOnly 'javax.annotation:jsr250-api:1.0'
     testImplementation 'androidx.test:core:1.2.0'
+
+    //Analytics
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
 }
