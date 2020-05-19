@@ -1,11 +1,14 @@
 package hu.bme.aut.todolist.ui.details;
 
 import android.os.Bundle;
+import android.renderscript.RSInvalidStateException;
 import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import javax.inject.Inject;
 
@@ -19,6 +22,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
     @Inject
     DetailsPresenter detailsPresenter;
     private String taskId;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +32,8 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
     }
 
@@ -47,6 +53,7 @@ public class DetailsActivity extends AppCompatActivity implements DetailsScreen 
 
     @Override
     public void showTask(Task task) {
+        Crashlytics.getInstance().crash();
         ((TextView) findViewById(R.id.task_name_textview)).setText(task.getName());
         ((TextView) findViewById(R.id.task_description_textview)).setText(task.getDesc());
     }

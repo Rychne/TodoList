@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     private RecyclerView recyclerView;
     private TaskRecyclerViewAdapter adapter;
     private FloatingActionButton createTaskButton;
+    private FirebaseAnalytics mFirebaseAnalytics;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
             }
         });
 
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
     }
 
     @Override
@@ -70,6 +75,9 @@ public class MainActivity extends AppCompatActivity implements MainScreen {
     public void showTasks(List<Task> tasks) {
         adapter.clear();
         adapter.addTasks(tasks);
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_LIST, "List of tasks");
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.VIEW_ITEM_LIST, bundle);
     }
 
     @Override

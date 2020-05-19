@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "31240138455",
+    "firebase_url": "https://kolesza-renta.firebaseio.com",
+    "project_id": "kolesza-renta",
+    "storage_bucket": "kolesza-renta.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:31240138455:android:a9e5ff0ae89f7cd9820a92",
+        "android_client_info": {
+          "package_name": "hu.bme.aut.todolist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "31240138455-2op25dpihi44bcrq5c49mm32bs5ga12e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCy3jVYIA4q8AJsKJEyHpl1BPfPACQg59M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "31240138455-2op25dpihi44bcrq5c49mm32bs5ga12e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
